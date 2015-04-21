@@ -1,0 +1,17 @@
+{
+  "manifest_version": 2,
+  "name": "Chrome Bitbucket CI Status",
+  "description": "View Bitbucket CI status",
+  "version": "1.0",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://bitbucket.org/*/pull-request/*"
+      ],
+      "js": [
+        "js/content.js"
+      ]
+    }
+  ],
+  "options_page": "html/options.html"
+}
