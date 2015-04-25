@@ -14,7 +14,7 @@ table td {
     width: 50%;
 }
 
-input[type=text] {
+input[type=text], select {
     border: 1px solid #D1D1D1;
     border-radius: 4px;
     box-shadow: none;
@@ -29,6 +29,11 @@ input[type=text] {
 input[type=text]:focus {
     box-shadow: 0 0 5px rgba(0,0,0,0.2);
     border: 1px solid rgba(0,0,0,0.2);
+}
+
+select {
+    padding: 5px 10px;
+    width: 168px;
 }
 
 button {

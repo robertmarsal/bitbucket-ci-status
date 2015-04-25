@@ -13,20 +13,38 @@
                 <thead>
                     <tr>
                         <th>Provider</th>
-                        <th>Key</th>
+                        <th>Project</th>
+                        <th>Extra</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr class="option">
                         <td>Shippable</td>
+                        <td>silverdoor/silverdoor</td>
+                        <td>1231265465465465456</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select id="provider">
+                                <option value="shippable">
+                                    Shippable
+                                </option>
+                            </select>
+                        </td>
                         <td>
                             <input type="text"
-                                   id="shippableProjectId"
-                                   placeholder="Project ID">
+                                   id="project"
+                                   placeholder="organisation/project">
+                        </td>
+                        <td>
+                            <input type="text"
+                                   id="extra"
+                                   placeholder="project id">
                         </td>
                     </tr>
                 </tbody>
             </table>
+            <button id="add">Add</button>
             <button id="save">Save</button>
         </div>
         <script src="../js/options.js"></script>

@@ -1,8 +1,9 @@
 {
+  "author": "Robert Boloc <robertboloc@gmail.com>",
   "manifest_version": 2,
-  "name": "Chrome Bitbucket CI Status",
-  "description": "View Bitbucket CI status",
-  "version": "1.0",
+  "name": "Bitbucket CI Status",
+  "description": "Allows viewing the CI status of pull requests on Bitbucket",
+  "version": "1.0.0",
   "content_scripts": [
     {
       "matches": [
@@ -19,5 +20,10 @@
   },
   "permissions": [
     "storage"
-  ]
+  ],
+  "icons": {
+    "128": "icon/128.png",
+    "48": "icon/48.png",
+    "16": "icon/16.png"
+  }
 }

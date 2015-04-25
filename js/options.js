@@ -1,4 +1,14 @@
 /**
+ * Adds a new row.
+ */
+function addOptions() {
+
+    var add = document.getElementById('add-row');
+
+
+}
+
+/**
  * Stores the new options.
  */
 function saveOptions() {
@@ -31,5 +41,6 @@ function restoreOptions() {
 // Attach the document ready listener
 document.addEventListener('DOMContentLoaded', restoreOptions);
 
-// Attach the save event listener
+// Attach the add and save event listeners
+document.getElementById('add').addEventListener('click', addOptions);
 document.getElementById('save').addEventListener('click', saveOptions);
