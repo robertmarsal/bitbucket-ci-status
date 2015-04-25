@@ -1,3 +1,6 @@
+/**
+ * Stores the new options.
+ */
 function saveOptions() {
     var shippableProjectId = document.getElementById('shippableProjectId').value;
 
@@ -14,6 +17,9 @@ function saveOptions() {
     });
 }
 
+/**
+ * Restores the already saved options.
+ */
 function restoreOptions() {
     chrome.storage.sync.get({
         shippableProjectId: 'Project ID'
@@ -22,7 +28,7 @@ function restoreOptions() {
     });
 }
 
-// Attache the document ready listener
+// Attach the document ready listener
 document.addEventListener('DOMContentLoaded', restoreOptions);
 
 // Attach the save event listener
