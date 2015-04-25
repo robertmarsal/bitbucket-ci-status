@@ -2,12 +2,34 @@
 <html>
     <head>
         <title>Chrome Bitbucket CI Status Options</title>
+        <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600"
+              rel="stylesheet"
+              type="text/css">
+        <link rel="stylesheet" href="../css/options.css">
     </head>
     <body>
-        <ul>
-            <li>
-
-            </li>
-        </ul>
+        <div class="container">
+            <h1>Chrome Bitbucket CI Status</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Provider</th>
+                        <th>Key</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Shippable</td>
+                        <td>
+                            <input type="text"
+                                   id="shippableProjectId"
+                                   placeholder="Project ID">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button id="save">Save</button>
+        </div>
+        <script src="../js/options.js"></script>
     </body>
 </html>
