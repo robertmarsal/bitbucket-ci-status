@@ -5,12 +5,8 @@ html, body, input, button {
     color: #222;
 }
 
-h1 {
-    font-weight: normal;
-}
-
 table {
-    width: 50%;
+    width: 80%;
     margin: 5% auto auto auto;
 }
 
@@ -36,7 +32,8 @@ input[type=text]:focus {
 }
 
 button {
-    margin-top: 10%;
+    margin-top: 5%;
+    margin-bottom: 5%;
     height: 30px;
     padding: 0 20px;
     background-color: transparent;
@@ -53,7 +50,7 @@ button:focus {
 }
 
 .container {
-    width: 800px;
+    width: 600px;
     margin: 5% auto auto auto;
     text-align: center;
 }

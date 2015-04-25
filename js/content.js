@@ -1,15 +1,46 @@
-// Obtain the current branch
-var branch = document.querySelector('.branch a').text;
+function init (options) {
 
-// Obtain the SVG
-var request = new XMLHttpRequest(); // new XML request
-request.open("GET", "https://api.shippable.com/projects/552416e65ab6cc1352bb01a8/badge?branchName=" + branch, false);
-request.send(null); // get the SVG file
+    if (!options) {
+        throw new Error('Chrome Bitbucket CI Status is not configured. Please visit the options page');
+    }
 
-var svg = request.responseXML.getElementsByTagName("svg")[0];
+    // Obtain the current branch
+    var branch = document.querySelector('.branch a').text;
 
-var shippableStatus = svg.childNodes[4].textContent;
-
-if (shippableStatus === 'buildshippable') {
-
+    // Call all the providers and get statuses for all the enabled ones.
+    shippableStatus(branch, options);
 }
+
+function shippableStatus (branch, options) {
+
+    if (!options.shippableProjectId) {
+        return; // Shippable is not enabled
+    }
+
+    var reviewersGroup   = document.querySelector('.reviewers-group');
+    var insertBeforeNode = document.querySelector('.reviewers-group').parentNode.childNodes[5];
+
+    var buildStatusGroup = document.createElement('div');
+        buildStatusGroup.setAttribute('class', 'clearfix reviewers-group');
+        buildStatusGroup.innerHTML = '' +
+            '<dt>Shippable</dt>' +
+            '<dd class="participants">' +
+                '<ol>' +
+                    '<li>' +
+                        '<img ' +
+                            'style="margin-top: 7px;"' +
+                            'src="https://api.shippable.com/projects/' + options.shippableProjectId + '/badge?branchName=' + branch +'">' +
+                    '</li>' +
+                    '</ol>' +
+            '</dd>'
+        ;
+
+    reviewersGroup.parentNode.insertBefore(buildStatusGroup, insertBeforeNode);
+}
+
+function onOptionsLoaded(options) {
+    init(options);
+}
+
+// Get the stored options
+chrome.storage.sync.get("shippableProjectId", onOptionsLoaded);
