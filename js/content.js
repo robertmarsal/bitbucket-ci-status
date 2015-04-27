@@ -6,11 +6,19 @@
 function init (options) {
 
     if (!options) {
-        throw new Error('Chrome Bitbucket CI Status is not configured. Please visit the options page');
+        throw new Error('Bitbucket CI Status is not configured. Please visit the options page');
     }
 
-    // Call all the providers and get statuses for all the enabled ones.
-    shippableStatus(options);
+    var repo = document.querySelector('#repo-avatar-link').getAttribute('href');
+        repo = repo.substr(1);
+
+    if (repo in options) {
+        for (var i = 0; i < options[repo].length ; i++) {
+            if (options[repo][i].provider === 'Shippable') {
+                shippableStatus(options[repo][i].extra);
+            }
+        }
+    }
 }
 
 /**
@@ -18,10 +26,10 @@ function init (options) {
  *
  * @param options
  */
-function shippableStatus (options) {
+function shippableStatus (projectId) {
 
-    if (!options.shippableProjectId) {
-        return; // Shippable is not enabled
+    if (!projectId) {
+        return; // Shippable is not configured
     }
 
     // Obtain the current branch
@@ -29,7 +37,9 @@ function shippableStatus (options) {
 
     appendStatus(
         'Shippable',
-        '<img src="https://api.shippable.com/projects/' + options.shippableProjectId + '/badge?branchName=' + branch +'">'
+        '<a href="https://app.shippable.com/projects/' + projectId + '" target="_blank">' +
+        '<img src="https://api.shippable.com/projects/' + projectId + '/badge?branchName=' + branch +'">' +
+        '</a>'
     );
 }
 
@@ -64,9 +74,8 @@ function appendStatus(vendor, status) {
  * @param options
  */
 function onOptionsLoaded(options) {
-
-    init(options);
+    init(options.options);
 }
 
 // Get the stored options
-chrome.storage.sync.get("shippableProjectId", onOptionsLoaded);
+chrome.storage.sync.get("options", onOptionsLoaded);

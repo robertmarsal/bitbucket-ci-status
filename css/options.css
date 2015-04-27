@@ -62,6 +62,18 @@ button:focus {
 }
 
 #save {
+    background-color: #acd14a;
+    color: #fff;
     padding: 0;
     width: 120px;
+}
+
+#add {
+    background-color: #f5884c;
+    color: #fff;
+}
+
+.delete {
+    background-color: #d83c43;
+    color: #fff;
 }
