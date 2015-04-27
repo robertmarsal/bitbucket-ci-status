@@ -60,3 +60,8 @@ button:focus {
     margin: 5% auto auto auto;
     text-align: center;
 }
+
+#save {
+    padding: 0;
+    width: 120px;
+}
