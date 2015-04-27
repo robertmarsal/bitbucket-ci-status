@@ -61,7 +61,7 @@ function saveOptions() {
         options[repo].push({
             provider: provider,
             extra: extra
-        })
+        });
     }
 
     // Store the options
@@ -87,7 +87,7 @@ function restoreOptions() {
 
         for (var repo in items.options) {
             if (items.options.hasOwnProperty(repo)) {
-                for (provider in items.options[repo]) {
+                for (var provider in items.options[repo]) {
 
                     var tr = document.createElement('tr');
                     tr.className = 'option';

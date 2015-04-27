@@ -16,7 +16,7 @@ function init (options) {
     var branch = document.querySelector('.branch a').text;
 
     if (repo in options) {
-        console.log(options);
+
         for (var i = 0; i < options[repo].length ; i++) {
             if (options[repo][i].provider === 'Shippable') {
                 shippableStatus(branch, options[repo][i].extra);
