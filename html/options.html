@@ -15,18 +15,20 @@
                         <th>Provider</th>
                         <th>Project</th>
                         <th>Extra</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="options-tbody">
                     <tr class="option">
                         <td>Shippable</td>
                         <td>silverdoor/silverdoor</td>
                         <td>1231265465465465456</td>
+                        <td><button class="delete">Delete</button></td>
                     </tr>
                     <tr>
                         <td>
                             <select id="provider">
-                                <option value="shippable">
+                                <option value="Shippable">
                                     Shippable
                                 </option>
                             </select>
@@ -41,10 +43,10 @@
                                    id="extra"
                                    placeholder="project id">
                         </td>
+                        <td><button id="add">Add</button></td>
                     </tr>
                 </tbody>
             </table>
-            <button id="add">Add</button>
             <button id="save">Save</button>
         </div>
         <script src="../js/options.js"></script>

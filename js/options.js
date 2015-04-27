@@ -3,9 +3,38 @@
  */
 function addOptions() {
 
-    var add = document.getElementById('add-row');
+    var tableBody = document.getElementById('options-tbody');
 
+    var provider = document.querySelector('#provider');
+    var project  = document.querySelector('#project');
+    var extra    = document.querySelector('#extra');
 
+    var tr = document.createElement('tr');
+    tr.className = 'option';
+    tr.innerHTML = '' +
+        '<td>' + String(provider.value) + '</td>' +
+        '<td>' + String(project.value) + '</td>' +
+        '<td>' + String(extra.value) + '</td>' +
+        '<td><button class="delete">Delete</button></td>';
+
+    tableBody.insertBefore(tr, tableBody.children[tableBody.children.length - 1]);
+
+    // Clear the current values
+    provider.value = 'Shippable';
+    project.value  = '';
+    extra.value    = '';
+
+    attachDeleteListeners(); // Re-attach the delete event listeners
+}
+
+/**
+ * Removes an existing row.
+ */
+function deleteOptions() {
+
+    var row = this.parentNode.parentNode;
+
+    row.parentNode.removeChild(row);
 }
 
 /**
@@ -37,10 +66,19 @@ function restoreOptions() {
         document.getElementById('shippableProjectId').value = items.shippableProjectId;
     });
 }
-
+/*
 // Attach the document ready listener
 document.addEventListener('DOMContentLoaded', restoreOptions);
+*/
 
-// Attach the add and save event listeners
+function attachDeleteListeners() {
+    var deleteButtons = document.getElementsByClassName('delete');
+    for (var i = 0; i < deleteButtons.length; i++) {
+        deleteButtons[i].addEventListener('click', deleteOptions);
+    }
+}
+
+// Attach the add, delete and save event listeners
 document.getElementById('add').addEventListener('click', addOptions);
 document.getElementById('save').addEventListener('click', saveOptions);
+attachDeleteListeners();
