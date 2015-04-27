@@ -12,10 +12,17 @@ function init (options) {
     var repo = document.querySelector('#repo-avatar-link').getAttribute('href');
         repo = repo.substr(1);
 
+    // Obtain the current branch
+    var branch = document.querySelector('.branch a').text;
+
     if (repo in options) {
+        console.log(options);
         for (var i = 0; i < options[repo].length ; i++) {
             if (options[repo][i].provider === 'Shippable') {
-                shippableStatus(options[repo][i].extra);
+                shippableStatus(branch, options[repo][i].extra);
+            }
+            if (options[repo][i].provider === 'Travis CI') {
+                travisStatus(branch, repo);
             }
         }
     }
@@ -26,14 +33,11 @@ function init (options) {
  *
  * @param options
  */
-function shippableStatus (projectId) {
+function shippableStatus (branch, projectId){
 
     if (!projectId) {
         return; // Shippable is not configured
     }
-
-    // Obtain the current branch
-    var branch = document.querySelector('.branch a').text;
 
     appendStatus(
         'Shippable',
@@ -41,6 +45,21 @@ function shippableStatus (projectId) {
         '<img src="https://api.shippable.com/projects/' + projectId + '/badge?branchName=' + branch +'">' +
         '</a>'
     );
+}
+
+function travisStatus(branch, repo){
+
+    if (!repo) {
+        return;
+    }
+
+    appendStatus(
+        'Travis CI',
+        '<a href="https://travis-ci.org/' + repo + '/builds/" target="_blank">' +
+        '<img src="https://api.travis-ci.org/' + repo + '.svg?branch=' + branch + '">' +
+        '</a>'
+    );
+
 }
 
 /**
