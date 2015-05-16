@@ -1,1 +1,1 @@
-# Bitbucket CI Status Chrome
+# Bitbucket CI Status
