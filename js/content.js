@@ -93,7 +93,10 @@ function appendStatus(vendor, status) {
  * @param options
  */
 function onOptionsLoaded(options) {
+
     init(options.options);
+
+    setInterval(function() {init(options.options)}, 60000);
 }
 
 // Get the stored options
