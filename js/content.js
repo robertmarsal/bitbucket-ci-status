@@ -73,15 +73,22 @@ function appendStatus(vendor, status) {
     var reviewersGroup   = document.querySelector('.reviewers-group');
     var insertBeforeNode = document.querySelector('.reviewers-group').parentNode.childNodes[5];
 
-    var buildStatusGroup = document.createElement('div');
-        buildStatusGroup.setAttribute('class', 'clearfix');
-        buildStatusGroup.innerHTML = '' +
-            '<dt>' + vendor + '</dt>' +
-            '<dd class="participants">' +
-                '<ol>' +
-                    '<li>' + status + '</li>' +
-                '</ol>' +
-            '</dd>'
+    // Check if the status exists already, create if not
+    var buildStatusGroup = document.getElementById('bitbucket-ci-status');
+
+    if (buildStatusGroup === null) {
+        buildStatusGroup = document.createElement('div');
+        buildStatusGroup.setAttribute('id', 'bitbucket-ci-status');
+        buildStatusGroup.setAttribute('class', 'clearfix reviewers');
+    }
+
+    buildStatusGroup.innerHTML = '' +
+        '<dt>' + vendor + '</dt>' +
+        '<dd class="participants">' +
+            '<ol>' +
+                '<li>' + status + '</li>' +
+            '</ol>' +
+        '</dd>'
     ;
 
     reviewersGroup.parentNode.insertBefore(buildStatusGroup, insertBeforeNode);
@@ -96,7 +103,7 @@ function onOptionsLoaded(options) {
 
     init(options.options);
 
-    setInterval(function() {init(options.options)}, 60000);
+    setInterval(function() {init(options.options);}, 60000);
 }
 
 // Get the stored options
