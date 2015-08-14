@@ -18,48 +18,17 @@ function init (options) {
     if (repo in options) {
 
         for (var i = 0; i < options[repo].length ; i++) {
-            if (options[repo][i].provider === 'Shippable') {
-                shippableStatus(branch, options[repo][i].extra);
-            }
-            if (options[repo][i].provider === 'Travis CI') {
-                travisStatus(branch, repo);
-            }
+
+            var badgeUrl = options[repo][i].badgeUrl.replace(/%BRANCH%/, branch);
+
+            appendStatus(
+                'Build Status',
+                '<a href="' + options[repo][i].projectUrl + '" target="_blank">' +
+                '<img src="' + badgeUrl + '">' +
+                '</a>'
+            )
         }
     }
-}
-
-/**
- * Updates the "Shippable" status.
- *
- * @param options
- */
-function shippableStatus (branch, projectId){
-
-    if (!projectId) {
-        return; // Shippable is not configured
-    }
-
-    appendStatus(
-        'Shippable',
-        '<a href="https://app.shippable.com/projects/' + projectId + '" target="_blank">' +
-        '<img src="https://api.shippable.com/projects/' + projectId + '/badge?branchName=' + branch +'">' +
-        '</a>'
-    );
-}
-
-function travisStatus(branch, repo){
-
-    if (!repo) {
-        return;
-    }
-
-    appendStatus(
-        'Travis CI',
-        '<a href="https://travis-ci.org/' + repo + '/builds/" target="_blank">' +
-        '<img src="https://api.travis-ci.org/' + repo + '.svg?branch=' + branch + '">' +
-        '</a>'
-    );
-
 }
 
 /**
@@ -68,7 +37,7 @@ function travisStatus(branch, repo){
  * @param vendor
  * @param status
  */
-function appendStatus(vendor, status) {
+function appendStatus(label, status) {
 
     var reviewersGroup   = document.querySelector('.reviewers-group');
     var insertBeforeNode = document.querySelector('.reviewers-group').parentNode.childNodes[5];
@@ -83,7 +52,7 @@ function appendStatus(vendor, status) {
     }
 
     buildStatusGroup.innerHTML = '' +
-        '<dt>' + vendor + '</dt>' +
+        '<dt>' + label + '</dt>' +
         '<dd class="participants">' +
             '<ol>' +
                 '<li>' + status + '</li>' +
