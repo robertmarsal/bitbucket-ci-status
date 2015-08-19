@@ -5,24 +5,24 @@ function addOptions() {
 
     var tableBody = document.getElementById('options-tbody');
 
-    var provider = document.querySelector('#provider');
-    var project  = document.querySelector('#project');
-    var extra    = document.querySelector('#extra');
+    var project    = document.querySelector('#project');
+    var badgeUrl   = document.querySelector('#badge-url');
+    var projectUrl = document.querySelector('#project-url');
 
     var tr = document.createElement('tr');
     tr.className = 'option';
     tr.innerHTML = '' +
-        '<td>' + String(provider.value) + '</td>' +
         '<td>' + String(project.value) + '</td>' +
-        '<td>' + String(extra.value) + '</td>' +
+        '<td>' + String(badgeUrl.value) + '</td>' +
+        '<td>' + String(projectUrl.value) + '</td>' +
         '<td><button class="delete">Delete</button></td>';
 
     tableBody.insertBefore(tr, tableBody.children[tableBody.children.length - 1]);
 
     // Clear the current values
-    provider.value = 'Shippable';
-    project.value  = '';
-    extra.value    = '';
+    project.value    = '';
+    badgeUrl.value   = '';
+    projectUrl.value = '';
 
     attachDeleteListeners(); // Re-attach the delete event listeners
 }
@@ -46,21 +46,21 @@ function saveOptions() {
 
     var optionsRows = document.getElementsByClassName('option');
 
-    var provider, repo, extra;
+    var project, badgeUrl, projectUrl;
 
     for (var i = 0; i < optionsRows.length; i++) {
 
-        provider = optionsRows[i].children[0].textContent;
-        repo     = optionsRows[i].children[1].textContent;
-        extra    = optionsRows[i].children[2].textContent;
+        project    = optionsRows[i].children[0].textContent;
+        badgeUrl   = optionsRows[i].children[1].textContent;
+        projectUrl = optionsRows[i].children[2].textContent;
 
-        if (!options[repo]) {
-            options[repo] = [];
+        if (!options[project]) {
+            options[project] = [];
         }
 
-        options[repo].push({
-            provider: provider,
-            extra: extra
+        options[project].push({
+            badgeUrl: badgeUrl,
+            projectUrl: projectUrl
         });
     }
 
@@ -68,12 +68,8 @@ function saveOptions() {
     chrome.storage.sync.set({
         options: options
     }, function() {
-        // Display feedback
-        var status = document.getElementById('save');
-        status.textContent = 'Options saved';
-        setTimeout(function() {
-            status.textContent = 'Save';
-        }, 1500);
+        // Close the options window once the options have been saved
+        window.close();
     });
 }
 
@@ -85,16 +81,15 @@ function restoreOptions() {
 
         var tableBody = document.getElementById('options-tbody');
 
-        for (var repo in items.options) {
-            if (items.options.hasOwnProperty(repo)) {
-                for (var provider in items.options[repo]) {
-
+        for (var project in items.options) {
+            if (items.options.hasOwnProperty(project)) {
+                for (var provider in items.options[project]) {
                     var tr = document.createElement('tr');
                     tr.className = 'option';
                     tr.innerHTML = '' +
-                    '<td>' + String(items.options[repo][provider].provider) + '</td>' +
-                    '<td>' + String(repo) + '</td>' +
-                    '<td>' + String(items.options[repo][provider].extra) + '</td>' +
+                    '<td>' + String(project) + '</td>' +
+                    '<td>' + String(items.options[project][provider].badgeUrl) + '</td>' +
+                    '<td>' + String(items.options[project][provider].projectUrl) + '</td>' +
                     '<td><button class="delete">Delete</button></td>';
 
                     tableBody.insertBefore(tr, tableBody.children[tableBody.children.length - 1]);

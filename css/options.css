@@ -2,6 +2,7 @@ html, body, input, button {
     font-family: "Raleway", "HelveticaNeue",
                  "Helvetica Neue", Helvetica,
                  Arial, sans-serif;
+    font-size: 14px;
     color: #222;
 }
 
@@ -19,7 +20,7 @@ input[type=text], select {
     border-radius: 4px;
     box-shadow: none;
     padding: 6px 10px;
-    width: 168px;
+    width: 245px;
     text-align: center;
     transition: all 0.30s ease-in-out;
     outline: none;
@@ -56,7 +57,7 @@ button:focus {
 }
 
 .container {
-    width: 700px;
+    width: 900px;
     margin: 5% auto auto auto;
     text-align: center;
 }
@@ -71,6 +72,12 @@ button:focus {
 #add {
     background-color: #f5884c;
     color: #fff;
+}
+
+#legend {
+    text-align: left;
+    margin-left: 5px;
+    font-size: 13px;
 }
 
 .delete {

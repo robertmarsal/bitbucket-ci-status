@@ -8,14 +8,18 @@ Navigate to the store page and click "Add to Chrome" https://chrome.google.com/w
 ## Configuration
 Once installed visit the "Options" page of the extension and set up your repositories.
 
-## Providers
+### Project
+The project is your namespace and project on Bitbucket. For example, if your 
+organisation is called organisation and your project is called test your project
+field must be organisation/test.
 
-All providers require a project to be specified, but some have special requirements. Providers must be enabled for each repository you are going to use.
+### Badge URL
+The badge URL is supplied by your CI provider. It usually has the following 
+format: http://ci.provider.com/build-status/image/1?branch=feature-test.
+Please store the badge url replacing the branch name with **%BRANCH%**. This 
+will then get replaced with each branch on the pull request page.
+The final url should be something like: 
+**http://ci.provider.com/build-status/image/1?branch=%BRANCH%**.
 
-### Shippable
-
-To enable a Shippable project, besides the project name you must specify the project id. You can obtain this from the url of your project: https://app.shippable.com/projects/{projectid}. Put the project id in the extra option for the repository.
-
-### Travis CI
-
-Travis has no special requiremens, so the extra options can be empty
+### Project URL
+When the badge is clicked it will redirect to this url.

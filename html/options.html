@@ -12,24 +12,13 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Provider</th>
                         <th>Project</th>
-                        <th>Extra</th>
-                        <th>Action</th>
+                        <th>Badge URL</th>
+                        <th>Project URL</th>
                     </tr>
                 </thead>
                 <tbody id="options-tbody">
                     <tr>
-                        <td>
-                            <select id="provider">
-                                <option value="Shippable">
-                                    Shippable
-                                </option>
-                                <option value="Travis CI">
-                                    Travis CI
-                                </option>
-                            </select>
-                        </td>
                         <td>
                             <input type="text"
                                    id="project"
@@ -37,14 +26,25 @@
                         </td>
                         <td>
                             <input type="text"
-                                   id="extra"
-                                   placeholder="project id (only shippable)">
+                                   id="badge-url"
+                                   placeholder="https://api.travis-ci.org/organisation/project.svg?branch=$BRANCH$">
+                        </td>
+                        <td>
+                            <input type="text"
+                                   id="project-url"
+                                   placeholder="https://travis-ci.org/organisation/project">
                         </td>
                         <td><button id="add">Add</button></td>
                     </tr>
                 </tbody>
             </table>
             <button id="save">Save</button>
+            <div id="legend">
+                For documentation on usage please visit:
+                <a href="https://github.com/robertboloc/bitbucket-ci-status/blob/master/README.md">
+                    https://github.com/robertboloc/bitbucket-ci-status/blob/master/README.md
+                </a>
+            </div>
         </div>
         <script src="../js/options.js"></script>
     </body>
